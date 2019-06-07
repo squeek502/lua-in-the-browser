@@ -7,14 +7,17 @@ targeting [WebAssembly](https://webassembly.org/).
 
 # Status
 
-Able to produce `lib/lua.wasm`, however in the browser it says
-`LinkError: import object field 'getc' is not a Function`.
-
-To make further progress it is required to make modifications to Lua
-source code in order to remove the dependency on a file system.
-
 This depends on
-[pending modifications to Zig](https://github.com/ziglang/zig/pull/2512).
+[the changes to Zig in this branch of my fork](https://github.com/squeek502/zig/tree/lua-in-the-browser).
+
+Able to produce `lib/lua.wasm`, however in the browser it is still not working.
+
+Issues that need to be resolved:
+
+- `malloc`/`free`/`realloc` need to be implemented somehow
+- Some Lua functions are not being provided properly: `LinkError: import object field 'luaopen_package' is not a Function`
+
+Note: File system functions use placeholder functions provided by Javascript at runtime.
 
 # How to build it and run it
 

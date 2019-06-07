@@ -6,10 +6,27 @@
 </head>
 <body>
     <script>
+        let stubFn = function() {
+            console.warn('missing function');
+        }
         fetch('lib/lua.wasm')
             .then(response => response.arrayBuffer())
             .then(bytes => WebAssembly.instantiate(bytes, {
-                env: {},
+                env: {
+                    getc: stubFn,
+                    feof: stubFn,
+                    fread: stubFn,
+                    fwrite: stubFn,
+                    fgets: stubFn,
+                    fprintf: stubFn,
+                    fflush: stubFn,
+                    free: stubFn,
+                    realloc: stubFn,
+                    malloc: stubFn,
+                    setjmp: stubFn,
+                    longjmp: (function() { throw new Error("longjmp"); }),
+                    abort: (function() { throw new Error("abort"); })
+                },
             }))
             .then(result => {
                 throw new Error("look at me");

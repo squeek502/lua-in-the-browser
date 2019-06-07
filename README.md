@@ -14,7 +14,7 @@ Able to produce `lib/lua.wasm`, however in the browser it is still not working.
 
 Issues that need to be resolved:
 
-- `malloc`/`free`/`realloc` need to be implemented somehow
+- `malloc`/`free`/`realloc` need to be implemented somehow ([zee_alloc?](https://github.com/fengb/zee_alloc/blob/master/src/wasm_exports.zig))
 - Some Lua functions are not being provided properly: `LinkError: import object field 'luaopen_package' is not a Function`
 - Probably still quite a few more libc functions missing
 

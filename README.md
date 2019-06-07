@@ -16,6 +16,7 @@ Issues that need to be resolved:
 
 - `malloc`/`free`/`realloc` need to be implemented somehow
 - Some Lua functions are not being provided properly: `LinkError: import object field 'luaopen_package' is not a Function`
+- Probably still quite a few more libc functions missing
 
 Note: File system functions use placeholder functions provided by Javascript at runtime.
 

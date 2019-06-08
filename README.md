@@ -15,8 +15,71 @@ Able to produce `lib/lua.wasm`, however in the browser it is still not working.
 Issues that need to be resolved:
 
 - `malloc`/`free`/`realloc` need to be implemented somehow ([zee_alloc?](https://github.com/fengb/zee_alloc/blob/master/src/wasm_exports.zig))
-- Some Lua functions are not being provided properly: `LinkError: import object field 'luaopen_package' is not a Function`
-- Probably still quite a few more libc functions missing
+- Missing libc functions:
+  + localeconv
+  + localtime
+  + setlocale
+  + clearerr
+  + isxdigit
+  + snprintf
+  + strftime
+  + difftime
+  + freopen
+  + realloc
+  + fprintf
+  + longjmp
+  + tmpfile
+  + setvbuf
+  + strpbrk
+  + tolower
+  + iscntrl
+  + ispunct
+  + strcoll
+  + ferror
+  + fclose
+  + fflush
+  + fwrite
+  + setjmp
+  + ungetc
+  + getenv
+  + strcpy
+  + strtod
+  + gmtime
+  + system
+  + remove
+  + rename
+  + mktime
+  + tmpnam
+  + memchr
+  + signal
+  + fopen
+  + fread
+  + fgets
+  + abort
+  + fseek
+  + ftell
+  + atan2
+  + log10
+  + srand
+  + clock
+  + frexp
+  + fputs
+  + getc
+  + feof
+  + free
+  + fabs
+  + acos
+  + asin
+  + log2
+  + rand
+  + time
+  + exit
+  + cos
+  + exp
+  + log
+  + sin
+  + tan
+  + pow
 
 Note: File system functions use placeholder functions provided by Javascript at runtime.
 

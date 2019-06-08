@@ -6,35 +6,40 @@
 </head>
 <body>
     <script>
-        let stubFn = function() {
-            console.warn('missing function');
-        }
+        /* jshint esversion: 6 */
+        let stubs = [
+            "clearerr", "ferror", "fclose", "fflush", "fwrite",
+            "fputs", "getc", "feof", "fseek", "ftell", "fopen",
+            "fread", "fgets", "freopen", "fprintf", "ungetc",
+            "tmpnam", "remove", "rename", "tmpfile"
+        ];
+        let populateEnv = function(env) {
+            for (let i=0; i<stubs.length; i++) {
+                env[stubs[i]] = function(...args) {
+                    console.warn('missing function: '+name, args);
+                };
+            }
+            return env;
+        };
         fetch('lib/lua.wasm')
             .then(response => response.arrayBuffer())
             .then(bytes => WebAssembly.instantiate(bytes, {
-                env: {
-                    getc: stubFn,
-                    feof: stubFn,
-                    fopen: stubFn,
-                    freopen: stubFn,
-                    ferror: stubFn,
-                    fclose: stubFn,
-                    fread: stubFn,
-                    fwrite: stubFn,
-                    fgets: stubFn,
-                    fprintf: stubFn,
-                    fflush: stubFn,
-                    free: stubFn,
-                    realloc: stubFn,
-                    malloc: stubFn,
-                    setjmp: stubFn,
+                env: populateEnv({
+                    setjmp: (function(...args) { console.warn("setjmp", args); }),
+                    getenv: (function(name) { console.warn("getenv", name); }),
+                    free: (function() { throw new Error("free"); }),
+                    realloc: (function() { throw new Error("realloc"); }),
+                    malloc: (function() { throw new Error("malloc"); }),
                     longjmp: (function() { throw new Error("longjmp"); }),
-                    abort: (function() { throw new Error("abort"); })
-                },
+                    abort: (function() { throw new Error("abort"); }),
+                    signal: (function() { throw new Error("signal"); }),
+                    system: (function() { throw new Error("system"); }),
+                    exit: (function() { throw new Error("exit"); })
+                })
             }))
             .then(result => {
-                throw new Error("look at me");
                 const lua = result.instance.exports;
+                console.log(lua);
             });
     </script>
 </body>

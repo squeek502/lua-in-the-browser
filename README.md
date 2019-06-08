@@ -14,74 +14,62 @@ Able to produce `lib/lua.wasm`, however in the browser it is still not working.
 
 Issues that need to be resolved:
 
-- `malloc`/`free`/`realloc` need to be implemented somehow ([zee_alloc?](https://github.com/fengb/zee_alloc/blob/master/src/wasm_exports.zig))
 - Missing libc functions:
   + localeconv
   + localtime
   + setlocale
-  + clearerr
-  + isxdigit
   + snprintf
   + strftime
   + difftime
-  + freopen
-  + realloc
-  + fprintf
-  + longjmp
-  + tmpfile
   + setvbuf
   + strpbrk
-  + tolower
-  + iscntrl
-  + ispunct
   + strcoll
+  + strcpy
+  + strtod
+  + gmtime
+  + mktime
+  + memchr
+  + srand
+  + clock
+  + rand
+  + time
+
+- `malloc`/`free`/`realloc` need to be implemented somehow ([zee_alloc?](https://github.com/fengb/zee_alloc/blob/master/src/wasm_exports.zig))
+  + realloc
+  + free
+
+- libc functions that use a placeholder that prints a warning to the console:
+  + setjmp
+  + getenv
+
+- libc functions that use a placeholder that throws an error at runtime:
+  + longjmp
+  + abort
+  + exit
+  + system
+  + signal
+
+- libc IO functions that use a placeholder function that prints a warning to the console:
+  + clearerr
   + ferror
   + fclose
   + fflush
   + fwrite
-  + setjmp
-  + ungetc
-  + getenv
-  + strcpy
-  + strtod
-  + gmtime
-  + system
-  + remove
-  + rename
-  + mktime
-  + tmpnam
-  + memchr
-  + signal
-  + fopen
-  + fread
-  + fgets
-  + abort
-  + fseek
-  + ftell
-  + atan2
-  + log10
-  + srand
-  + clock
-  + frexp
   + fputs
   + getc
   + feof
-  + free
-  + fabs
-  + acos
-  + asin
-  + log2
-  + rand
-  + time
-  + exit
-  + cos
-  + exp
-  + log
-  + sin
-  + tan
-  + pow
-
-Note: File system functions use placeholder functions provided by Javascript at runtime.
+  + fseek
+  + ftell
+  + fopen
+  + fread
+  + fgets
+  + freopen
+  + fprintf
+  + ungetc
+  + tmpnam
+  + remove
+  + rename
+  + tmpfile
 
 # How to build it and run it
 
